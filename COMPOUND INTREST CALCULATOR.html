@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compound Interest Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .calculator {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .calculator input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .calculator button {
+            padding: 10px;
+            width: 100%;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .calculator button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h2>Compound Interest Calculator</h2>
+        <label for="principal">Principal Amount:</label>
+        <input type="number" id="principal" placeholder="Enter principal amount">
+
+        <label for="rate">Annual Interest Rate (%):</label>
+        <input type="number" id="rate" placeholder="Enter interest rate">
+
+        <label for="time">Time (years):</label>
+        <input type="number" id="time" placeholder="Enter time period in years">
+
+        <label for="frequency">Compounding Frequency (times per year):</label>
+        <input type="number" id="frequency" placeholder="Enter compounding frequency">
+
+        <button onclick="calculateCompoundInterest()">Calculate Interest</button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateCompoundInterest() {
+            // Get input values
+            var principal = document.getElementById('principal').value;
+            var rate = document.getElementById('rate').value;
+            var time = document.getElementById('time').value;
+            var frequency = document.getElementById('frequency').value;
+
+            // Validate inputs
+            if (principal === "" || rate === "" || time === "" || frequency === "") {
+                alert("Please fill in all fields");
+                return;
+            }
+
+            // Convert input values to numbers
+            principal = parseFloat(principal);
+            rate = parseFloat(rate) / 100;
+            time = parseFloat(time);
+            frequency = parseInt(frequency);
+
+            // Calculate compound interest
+            var amount = principal * Math.pow((1 + rate / frequency), frequency * time);
+            var interest = amount - principal;
+
+            // Display the result
+            document.getElementById('result').innerText = "Compound Interest: " + interest.toFixed(2);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .converter {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px black(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .converter input, .converter select {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .converter button {
+            padding: 10px;
+            width: 100%;
+            background-color: blue;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .converter button:hover {
+            background-color: blue;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="converter">
+        <h2>Currency Converter</h2>
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" placeholder="Enter amount" step="0.01">
+
+        <label for="conversionType">Convert:</label>
+        <select id="conversionType">
+            <option value="NairaToDollar">Naira to Dollar</option>
+            <option value="DollarToNaira">Dollar to Naira</option>
+        </select>
+
+        <button onclick="convertCurrency()">Convert</button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function convertCurrency() {
+            const nairaToDollarRate = 0.0006786747; // Example conversion rate: 1 Naira = 0.0006786747 USD
+            const dollarToNairaRate = 1473.46;    // Example conversion rate: 1 USD = 1473.46 Naira
+
+            const amount = parseFloat(document.getElementById('amount').value);
+            const conversionType = document.getElementById('conversionType').value;
+
+            if (isNaN(amount) || amount <= 0) {
+                alert("Please enter a valid amount");
+                return;
+            }
+
+            let result;
+            if (conversionType === "NairaToDollar") {
+                result = amount * nairaToDollarRate;
+                document.getElementById('result').innerText = `${amount} Naira = ${result.toFixed(2)} USD`;
+            } else if (conversionType === "DollarToNaira") {
+                result = amount * dollarToNairaRate;
+                document.getElementById('result').innerText = `${amount} USD = ${result.toFixed(2)} Naira`;
+            } else {
+                alert("Invalid conversion type");
+            }
+        }
+    </script>
+</body>
+</html>
+

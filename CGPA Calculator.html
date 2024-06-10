@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .calculator {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .calculator input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .calculator button {
+            padding: 10px;
+            width: 100%;
+            background-color: blue;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .calculator button:hover {
+            background-color: blue;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h2>CGPA Calculator</h2>
+        <label for="semester1">GPA for Semester 1:</label>
+        <input type="number" id="semester1" placeholder="Enter GPA (0 to 5)" min="0" max="5" step="0.01">
+
+        <label for="semester2">GPA for Semester 2:</label>
+        <input type="number" id="semester2" placeholder="Enter GPA (0 to 5)" min="0" max="5" step="0.01">
+
+        <button onclick="calculateAverageGPA()">Calculate CGPA</button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateAverageGPA() {
+            // Get input values
+            var gpa1 = document.getElementById('semester1').value;
+            var gpa2 = document.getElementById('semester2').value;
+
+            // Validate inputs
+            if (gpa1 === "" || gpa2 === "") {
+                alert("Please enter GPAs for both semesters");
+                return;
+            }
+            gpa1 = parseFloat(gpa1);
+            gpa2 = parseFloat(gpa2);
+
+            if (gpa1 < 0 || gpa1 > 5 || gpa2 < 0 || gpa2 > 5) {
+                alert("Please enter GPAs between 0 and 5");
+                return;
+            }
+
+            // Calculate average GPA
+            var averageGPA = (gpa1 + gpa2) / 2;
+
+            // Display the result
+            document.getElementById('result').innerText = "Average GPA: " + averageGPA.toFixed(2);
+        }
+    </script>
+</body>
+</html>
+
